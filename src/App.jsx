@@ -1,11 +1,14 @@
 import { useState } from "react";
 // import logo from './logo.svg'
 import "./App.css";
+import VideoPlayer from "./components/VideoPlayer";
 
 function App() {
   return (
     <div className="App">
-      <main>TikTok Clone</main>
+      <main>
+        <VideoPlayer />
+      </main>
     </div>
   );
 }
