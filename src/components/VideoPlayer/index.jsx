@@ -1,33 +1,39 @@
+import clsx from "clsx";
 import { useState, useRef } from "react";
 import styles from "./styles.module.css";
 
 const SRC =
-  "https://v16-webapp.tiktok.com/6e220df20f9bda02d2982ef697d9db80/622e878a/video/tos/useast2a/tos-useast2a-ve-0068c003/0ed0b01f41ff4312933359218b3ffc7d/?a=1988&br=1876&bt=938&cd=0%7C0%7C1%7C0&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=XOQ9-3CMnz7ThDA4vDXq&l=2022031318082601019216806624249681&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=ampuNGc6ZnN3OzMzNzczM0ApM2lnOzc0N2U1NztnZjU4ZGdwcDVmcjRfbmlgLS1kMTZzczMyYGNgMS80Xi1iMDUzMl46Yw%3D%3D&vl=&vr=";
+  "https://v16-webapp.tiktok.com/487057ab37214a87930458d8aeb3ac97/622fec33/video/tos/useast2a/tos-useast2a-pve-0037c001-aiso/5b297fea74044e928b69eef028966bb9/?a=1988&br=4168&bt=2084&cd=0%7C0%7C1%7C0&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=XOQ9-3CMnz7ThPnMvDXq&l=20220314193013010189050041174DB589&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=MzRobDk6ZnkzOzMzZjczM0ApNmY7PDplNGQ2Nzw2PDg2N2dnLWNicjRvNWlgLS1kMWNzc15fYWFeXjIvYGEtXmNhL2I6Yw%3D%3D&vl=&vr=";
 
-export default function VideoPlayer() {
+export default function VideoPlayer({src}) {
   const [playing, setPlaying] = useState(false);
   const video = useRef();
   const handlePlay = () => {
-    if (playing) {
-      video.current.pause();
-    } else {
-      video.current.play();
-    }
+    const { current: videoEl } = video;
+    playing
+      ? videoEl.pause()
+      : videoEl.play();
 
     setPlaying(!playing);
   };
 
+  const playerClassName = clsx(styles.player, {
+    [styles.hidden]: playing,
+  });
+
   return (
-    <div>
+    <div onClick={handlePlay}>
       <video
         // autoPlay
         // muted
         className={styles.video}
-        src={SRC}
         controls={false}
+        loop
+        onClick={handlePlay}
         ref={video}
+        src={src}
       />
-      <button className={styles.player} onClick={handlePlay}></button>
+      <i className={playerClassName} onClick={handlePlay} />
     </div>
   );
 }
