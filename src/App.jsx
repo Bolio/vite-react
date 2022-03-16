@@ -1,13 +1,15 @@
 import { useState } from "react";
 // import logo from './logo.svg'
 import "./App.css";
-import VideoPlayer from "./components/VideoPlayer";
+import FeedVideos from "./components/FeedVideos/index.jsx";
+// import VideoPlayer from "./components/VideoPlayer";
 
 function App() {
   return (
     <div className="App">
       <main>
-        <VideoPlayer />
+        {/* <VideoPlayer /> */}
+        <FeedVideos />
       </main>
     </div>
   );
